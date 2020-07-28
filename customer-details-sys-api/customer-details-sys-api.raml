@@ -1,0 +1,306 @@
+#%RAML 1.0
+title: customer-details-sys-api
+
+
+types:
+  Customer: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.1/customer-datatype.raml
+  Subscription: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.1/subscription-datatype.raml
+/customer:
+  get:
+    description: Retrieve customer data from Database
+    queryParameters:
+      status:
+        description: Status of the customer
+        required: false
+        enum:
+          - active
+          - inactive
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            type: Customer[]
+            
+      400:
+        body:
+          application/json:
+            example:
+              message: Error retrieving data from Customer database
+      500:
+        body:
+          application/json:
+            example:
+              message: Internal server Error
+      501:
+        body:
+          application/json:
+            example:
+              message: Method not implemented Error
+
+                       
+  post:
+    description: Add new customer details to Database
+    body:
+      application/json:
+        type: Customer[]
+    responses:
+      201:
+        description: Success
+        body:
+          application/json:
+            example:
+              message: Successfully added new Customer's details  
+      400:
+        body:
+          application/json:
+            example:
+              message: Error creating new Customer.  
+      500:
+        body:
+          application/json:
+            example:
+              message: Internal server Error
+      501:
+        body:
+          application/json:
+            example:
+              message: Method not implemented Error                  
+  /{id}:
+    get:
+      description: Retrieve details of a particular customer
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              type: Customer[]
+              
+        400:
+          body:
+            application/json:
+              example:
+                message: Error retrieving data from Customer database   
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error            
+    put:
+      description: Update entire Customer details by ID
+      body:
+        application/json:
+          type: Customer[]
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                message: Updated customer details
+        400:
+          body:
+            application/json:
+              example:
+                message: Error in replacing the details
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error        
+    patch:
+      description: Update particular details by ID
+      body:
+        application/json:
+          type: Customer[] 
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                message: Updated Customer details
+        400:
+          body:
+            application/json:
+              example:
+                message: Error in updating the details
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error        
+    delete:
+      description: Delete all the details of a particular customer
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                message: Customer details deleted
+        400:
+          body:
+            application/json:
+              example:
+                message: Error in deleting Customer account
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error        
+    /subcription:
+      get:
+        description: Retrieve all the subcription details of a particular customer 
+        responses:
+          200:
+            description: Success
+            body:
+              application/json:
+                type: Subscription[]
+                
+          400:
+            body:
+              application/json:
+                example:
+                  message: Error in retrieving subscription details by CustomerID
+          500:
+            body:
+              application/json:
+                example:
+                  message: Internal server Error
+          501:
+            body:
+              application/json:
+                example:
+                  message: Method not implemented Error        
+
+      post:
+        description: Customer adding new Subcription
+        body:
+          application/json:
+            type: Subscription[]
+            
+        responses:
+          201:
+            description: Success
+            body:
+              application/json:
+                example:
+                  message: Added new subscription details  
+          400:
+            body:
+              application/json:
+                example:
+                  message: Error in creating new subscription data 
+          500:
+            body:
+              application/json:
+                example:
+                  message: Internal server Error
+          501:
+            body:
+              application/json:
+                example:
+                  message: Method not implemented Error                   
+      /{id}:
+        get:
+          description: Retrieve specific subcription details of a customer
+          responses:
+            200:
+              description: Success
+              body:
+                application/json:
+                  type: Subscription[]
+
+            400:
+              body:
+                application/json:
+                  example:
+                    message: Error in retrieving subscription details by subscription ID
+            500:
+              body:
+                application/json:
+                  example:
+                    message: Internal server Error
+            501:
+              body:
+                application/json:
+                  example:
+                    message: Method not implemented Error        
+        patch:
+          description: Updating specific subscription details 
+          body:
+            application/json:
+              type: Subscription[]
+                
+          responses:
+            200:
+              description: Success
+              body:
+                application/json:
+                  example:
+                    message: Updated Subscription details
+            400:
+              body:
+                application/json:
+                  example:
+                    message: Error in updating the details
+            500:
+              body:
+                application/json:
+                  example:
+                    message: Internal server Error
+            501:
+              body:
+                application/json:
+                  example:
+                    message: Method not implemented Error        
+                             
+        delete: 
+          description: Delete specific subcription details of a customer 
+          responses:
+            200:
+              description: Success
+              body:
+                application/json:
+                  example:
+                    message: Deleted subcription details of Customer
+            400:
+              body:
+                application/json:
+                  example:
+                    message: Error in deleting subscription details by Id
+            500:
+              body:
+                application/json:
+                  example:
+                    message: Internal server Error
+            501:
+              body:
+                application/json:
+                  example:
+                    message: Method not implemented Error         
+                      
+
+                

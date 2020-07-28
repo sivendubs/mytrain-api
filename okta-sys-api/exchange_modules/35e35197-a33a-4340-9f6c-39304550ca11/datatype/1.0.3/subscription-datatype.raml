@@ -1,0 +1,49 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  subcriptionID?: 
+    description: Subcription Id generated when Customer added new subscription
+    type: integer
+    example: 101
+      
+  customerID: 
+    description: Customer's Id who has subscribed
+    type: string
+    example: "CUST1001"
+
+  orgin: 
+    description: From station for which Customer has subscribed delay alerts
+    type: string
+    example: "WAT"
+      
+  destination: 
+    description: Destination Station for which Customer has subscribed for delay alerts
+    type: string
+    example: "VIC"
+
+  fromTime: 
+    description: Start time offset 
+    type: time-only
+    example: 08:30:00
+
+  toTime: 
+    description: End time
+    type: time-only
+    example: 10:00:00
+
+  notificationTime: 
+    description: Indicate the notification time by which Customer should be notified with the delay alert
+    type: integer
+    example: 30
+
+  creationDate?: 
+    description: Date in which subscription is added
+    type: datetime
+    example: 2020-07-21T04:34:41.098Z
+      
+  updationDate?: 
+    description: Date in which Customer modified the subscription details
+    type: datetime
+    example: 2020-07-24T04:34:41.098Z
+      

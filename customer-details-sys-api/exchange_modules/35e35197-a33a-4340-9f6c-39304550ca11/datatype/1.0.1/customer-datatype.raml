@@ -1,0 +1,43 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  customerID?: 
+    description: ID of the Customer - Optional field
+    type: string
+    example: "CUST123"
+      
+  firstname: 
+    description: Customer's Firstname
+    type: string
+    example: "Jins"
+
+  lastname: 
+    description: Customer's Lastname
+    type: string
+    example: "Wilson"
+
+  emailID: 
+    description: Customer's emailid entered at the time of registration
+    type: string
+    example: "wilsonjins@gmail.com"
+
+  mobileNo: 
+    description: Mobile number entered by customer at registration time
+    type: string
+    example: "8547290661"
+
+  status?: 
+    description: Status of the customer whether active or inactive
+    type: string
+    example: "active"
+
+  creationDate?: 
+    description: Date at which customer is registered
+    type: datetime
+    example: 2020-07-21T04:34:41.098Z
+
+  updationDate?: 
+    description: Date at which customer modified details
+    type: datetime
+    example: 2020-07-23T04:20:12.012Z

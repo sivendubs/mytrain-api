@@ -1,0 +1,137 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/9aa25a5e-ad48-4250-809b-71eacb2d0973/ # 
+title: users-exp-api
+
+types: 
+  Customer: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.4/customer-datatype.raml
+  Credentials: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.4/okta-credentials-datatype.raml
+
+/customer:                     
+  post:
+    description: Register new customer
+    body:
+      application/json:
+        type: Customer[]
+    responses:
+      201:
+        description: Success
+        body:
+          application/json:
+            example:
+              message: Successfully added new Customer's details  
+      400:
+        body:
+          application/json:
+            example:
+              message: Error creating new Customer.  
+      500:
+        body:
+          application/json:
+            example:
+              message: Internal server Error
+      501:
+        body:
+          application/json:
+            example:
+              message: Method not implemented Error  
+/login:
+  post:
+    description: Authenticate customers with credentials
+    body:
+      application/json:
+        type: Credentials[]
+    responses:
+      200:
+        description: User login Success
+        body:
+          application/json:
+            type: Customer[]
+      400:
+        description: Error
+        body:
+          application/json:
+            example:
+              message: Error in login
+      401:
+        description: Unauthorised
+        body:
+          application/json:
+            example:
+              message: Unauthorised login
+                                
+  /{id}:                 
+    patch:
+      description: Update Details
+      body:
+        application/json:
+          type: Customer[] 
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                message: Updated Customer details
+        400:
+          body:
+            application/json:
+              example:
+                message: Error in updating the details
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error        
+    delete:
+      description: Delete all the details of a particular customer
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                message: Customer details deleted
+        400:
+          body:
+            application/json:
+              example:
+                message: Error in deleting Customer account
+        500:
+          body:
+            application/json:
+              example:
+                message: Internal server Error
+        501:
+          body:
+            application/json:
+              example:
+                message: Method not implemented Error  
+/forgot-password:
+  description: Create new password when customer select forgot password option
+  post:
+    body:
+      application/json:
+        type: Credentials[]
+    responses:
+      200:
+        description: New password created
+        body:
+          application/json:
+            example:
+              message: New password created successfully
+      400:
+        description: Error
+        body:
+          application/json:
+            example:
+              message: Error in creating new password        
+
+                      
+                    
+
+    
