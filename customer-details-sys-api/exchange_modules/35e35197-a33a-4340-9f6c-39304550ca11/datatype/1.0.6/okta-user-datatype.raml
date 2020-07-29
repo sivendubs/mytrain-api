@@ -1,28 +1,36 @@
 #%RAML 1.0 DataType
 
+
 type: object
 properties:
-  userID?:
-    description: UserId created in Okta
-    type: string
-    example: "00uk94o9tonhewFW34x6"
-  firstname:
+  firstName:
     description: User's Firstname
     type: string
     example: "Jins"
-  lastname: 
+
+  lastName: 
     description: User's Lastname  
     type: string
     example: "Wilson"  
+
+  emailID:
+    description: User's email address
+    type: string
+    example: "testokta123@gmail.com"  
+
+  mobileNo: 
+    description: Phone Number entered by user
+    type: string
+    example: "8887666542"  
+
   username:
     description: EmailId entered by user
     type: string
     example: "testokta123@gmail.com"
+
   password: 
     description: Password entered by the user during registration
     type: string
     example: "test@123"
-  mobileNo: 
-    description: Phone Number entered by user
-    type: string
-    example: "8887666542"
+    
+  

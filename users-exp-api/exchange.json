@@ -1,1 +1,1 @@
-{"main":"users-exp-api.raml","name":"users-exp-api","classifier":"raml","tags":[],"dependencies":[{"groupId":"35e35197-a33a-4340-9f6c-39304550ca11","assetId":"datatype","version":"1.0.4"}]}
+{"main":"users-exp-api.raml","name":"users-exp-api","classifier":"raml","tags":[],"dependencies":[{"groupId":"35e35197-a33a-4340-9f6c-39304550ca11","assetId":"datatype","version":"1.0.6"}]}

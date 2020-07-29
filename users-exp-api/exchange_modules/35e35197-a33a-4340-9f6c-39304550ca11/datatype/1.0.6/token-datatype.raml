@@ -5,14 +5,19 @@ properties:
   type?: 
     description: Type of token
     type: string
-    example: "JWT"
+    example: "Bearer"
 
-  expirationPeriod:
+  expiresIn:
     description: Indicate how long the token is active
     type: integer
     example: 10
 
-  token:
+  accessToken:
     description: Actual token value
     type: string
     example: "eb900942FcB74a0482Db02A881b2b23C"
+
+  scope:
+    description: Specifies access previlege requested as a part of authorization
+    type: string
+    example: "email"

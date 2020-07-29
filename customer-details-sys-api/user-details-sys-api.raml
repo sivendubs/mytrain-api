@@ -3,9 +3,10 @@ title: customer-details-sys-api
 
 
 types:
-  Customer: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.1/customer-datatype.raml
-  Subscription: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.1/subscription-datatype.raml
-/customer:
+  Customer: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.6/user-datatype.raml
+  Subscription: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.6/subscription-datatype.raml
+
+/users:
   get:
     description: Retrieve customer data from Database
     queryParameters:
@@ -20,7 +21,7 @@ types:
         description: Success
         body:
           application/json:
-            type: Customer[]
+            type: Customer
             
       400:
         body:
@@ -43,7 +44,7 @@ types:
     description: Add new customer details to Database
     body:
       application/json:
-        type: Customer[]
+        type: Customer
     responses:
       201:
         description: Success
@@ -74,7 +75,7 @@ types:
           description: Success
           body:
             application/json:
-              type: Customer[]
+              type: Customer
               
         400:
           body:
@@ -95,7 +96,7 @@ types:
       description: Update entire Customer details by ID
       body:
         application/json:
-          type: Customer[]
+          type: Customer
       responses:
         200:
           description: Success
@@ -122,7 +123,7 @@ types:
       description: Update particular details by ID
       body:
         application/json:
-          type: Customer[] 
+          type: Customer
       responses:
         200:
           description: Success
@@ -177,7 +178,7 @@ types:
             description: Success
             body:
               application/json:
-                type: Subscription[]
+                type: Subscription
                 
           400:
             body:
@@ -199,7 +200,7 @@ types:
         description: Customer adding new Subcription
         body:
           application/json:
-            type: Subscription[]
+            type: Subscription
             
         responses:
           201:
@@ -231,7 +232,7 @@ types:
               description: Success
               body:
                 application/json:
-                  type: Subscription[]
+                  type: Subscription
 
             400:
               body:
@@ -252,7 +253,7 @@ types:
           description: Updating specific subscription details 
           body:
             application/json:
-              type: Subscription[]
+              type: Subscription
                 
           responses:
             200:

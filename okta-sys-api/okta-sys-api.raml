@@ -1,25 +1,21 @@
 #%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/e2925bcd-e4b0-4516-ba4b-040d661aa347/ # 
 title: okta-sys-api
 
 types: 
-  Token: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.3/token-datatype.raml
-  OktaUser: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.3/customer-datatype.raml
-  Credentials: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.3/okta-credentials-datatype.raml
+  User: !include //exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.6/okta-user-datatype.raml
+  Userdetails: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.6/user-datatype.raml
+  Credentials: !include /exchange_modules/35e35197-a33a-4340-9f6c-39304550ca11/datatype/1.0.6/login-credentials-datatype.raml
 
-/oktauser:
+/users:
   get:
     description: Retrieving all users registered in Okta
-    headers:
-        Token:
-          type: Token[]
-          required: true
     responses:
       200:
-        description: Success
+        description: User created Successfully
         body:
           application/json:
-            type: OktaUser[]
-                             
+            type: Userdetails                        
       400:
         body:
           application/json:
@@ -27,19 +23,15 @@ types:
               message: Error retrieving Customer data 
   post:
     description: Creating new user in Okta
-    headers:
-        Token:
-          type: string
-          required: true
     body:
       application/json:
-       type: OktaUser[]
+       type: User
     responses:
       201:
         description: Created new user
         body:
           application/json:
-            type: OktaUser[] 
+            type: Userdetails
       400:
         body:
           application/json:
@@ -48,40 +40,30 @@ types:
   /{id}:
     get:
       description: Retrieve details of a user by ID
-      headers:
-        Token:
-          type: string
-          required: true
       responses:
         200:
           description: Successfully retrieve user details 
           body:
             application/json:
-              type: OktaUser[]
-          
+              type: Userdetails 
         404:
           description: User not found
           body:
               application/json:
                   example:
-                      {error: Resource not found}  
-      
+                      {error: Resource not found}      
     put:  
       description: Update details of a user
-      headers:
-        Token:
-          type: string
-          required: true
       body:
         application/json:
-              type: OktaUser[]
+              type: User
       responses:
         200:
           description: User details updated successfully
           body:
             application/json:
               properties:
-                type: OktaUser[]
+                type: User
 
         404:  
           description: User not found
@@ -89,59 +71,70 @@ types:
             application/json:
               example:
                 {error: Resource not found}
+    /forgetpassword:
+      post:
+        description: Change password
+        responses:
+          200:
+            description: New password created successfully
+            body:
+              application/json:
+                example:
+                  message: Created new password
+          400:
+            description: Bad request  
+            body:
+              application/json:
+                example:
+                  message: Error in changing password 
+          403:          
+            description: New password doesnot meet password policy 
+            body:
+              application/json:
+                example:
+                  message: Passwords must have at least 8 characters, a lowercase letter, an uppercase letter, a number 
+    /reset-password: 
+      post:
+        description: Reset password
+        responses:
+          200:
+            description: New password created successfully
+            body:
+              application/json:
+                example:
+                  message: Created new password
+          400:
+            description: Bad request  
+            body:
+              application/json:
+                example:
+                  message: Error in changing password 
+          403:          
+            description: New password doesnot meet password policy 
+            body:
+              application/json:
+                example:
+                  message: Passwords must have at least 8 characters, a lowercase letter, an uppercase letter, a number                              
                                               
-/authenticate:
-  post:
-    description: User authentication
-    body:
-      application/json:
-        type: Credentials[]
-                    
-    responses:
-      200:
-        description: Authenticated Successfully and generated session token
-        body:
-          application/json:
-            type: Token[]
-      401:
-        description: Unauthorised Access
-        body:
-          application/json:
-            example:
-              message: Authentication failed   
+  /authenticate:
+    post:
+      description: User authentication
+      body:
+        application/json:
+          type: Credentials
+                      
+      responses:
+        200:
+          description: Authenticated Successfully and generated session token
+        401:
+          description: Unauthorised Access
+          body:
+            application/json:
+              example:
+                message: Authentication failed     
+                  
         
-/forget-password:
-  post:
-    description: Change password
-    headers:
-      Token:
-        description: Token value
-        required: true
-        type: string
-    body:
-     application/json:
-        type: Credentials[]
-        
-
-    responses:
-      200:
-        description: Reset-password Success
-        body:
-          application/json:
-            example:
-              message: Created new password
-      400:
-        description: Bad request  
-        body:
-          application/json:
-            example:
-              message: Error in changing password 
-      403:          
-        description: New password doesnot meet password policy 
-        body:
-          application/json:
-            example:
-              message: Passwords must have at least 8 characters, a lowercase letter, an uppercase letter, a number      
+ 
 
                           
 
